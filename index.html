@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Portfolio Website</title>
 </head>
-<body>
+<body class="dark-theme">
     <header>
         <a href="#" class="logo">Hemanth</a>
         <nav>
@@ -19,9 +19,9 @@
             <a href="#contact">Contact</a>
         </nav>
         <div class="theme-toggle">
-            <input type="radio" id="light-theme" name="theme" checked>
+            <input type="radio" id="light-theme" name="theme">
             <label for="light-theme" class="light-label">☀️</label>
-            <input type="radio" id="dark-theme" name="theme">
+            <input type="radio" id="dark-theme" name="theme" checked>
             <label for="dark-theme" class="dark-label">🌙</label>
         </div>
     </header>
@@ -205,12 +205,24 @@
     const lightTheme = document.getElementById('light-theme');
     const darkTheme = document.getElementById('dark-theme');
     
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.remove('dark-theme');
+        lightTheme.checked = true;
+    } else {
+        document.body.classList.add('dark-theme');
+        darkTheme.checked = true;
+    }
+    
     lightTheme.addEventListener('change', () => {
         document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
     });
     
     darkTheme.addEventListener('change', () => {
         document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
     });
     </script>
     <script>
